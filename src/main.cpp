@@ -21,7 +21,7 @@ char ssid[50], password[50];
 AsyncWebServer server(80);
 Preferences preferences;
 
-void APMode()
+void ServerAPMode() // 
 {
   // Connect to Wi-Fi network with SSID and password
   Serial.println("Setting AP (Access Point)…");
@@ -30,7 +30,7 @@ void APMode()
 
   IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
-  Serial.println(IP);
+  Serial.println(IP); // 192.168.4.1/
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(SPIFFS, "/accesspoint.html"); });
@@ -83,9 +83,12 @@ void APMode()
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(115200); // Initiate serial communication with BaudRate = 115000
 
-  preferences.begin("credential", false);
+  preferences.begin("credential", false); // Initiate EEPROM Object Storage named "credential"
+
+  // You can change ssid and password as you wish
+  // This ssid and password works when ESP as Client
   String ssidPref = preferences.getString("ssid", "Sony XPERIA XZ2");
   String passwordPref = preferences.getString("password", "katakuri");
 
@@ -112,7 +115,7 @@ void setup()
 
   if (WiFi.status() != WL_CONNECTED)
   {
-    APMode();
+    ServerAPMode();
     while (1)
       ;
   }
