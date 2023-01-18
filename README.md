@@ -2,7 +2,7 @@
 
 ## ESP32 as Client
 
-![Alt text](image/client.png "Accees Point")
+![Alt text](client.png "Accees Point")
 
 ## ESP32 as Server
 
